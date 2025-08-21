@@ -13,6 +13,9 @@ import {
 } from "@/components/ui/sidebar"
 import { House } from "lucide-react";
 import Link from "next/link";
+import { routes } from "./AppSidebar.data";
+import { spawn } from "child_process";
+import { Span } from "next/dist/trace";
 
 
 export function AppSidebar() {
@@ -30,16 +33,20 @@ export function AppSidebar() {
                         Academia Rítmica
                     </SidebarGroupLabel>
                     <SidebarMenu className="space-y-2">
-                        <SidebarMenuItem>
-                            <SidebarMenuButton asChild>
-                                <a href="/home">
-                                    <div className="p-1 rounded-lg text-[#131119] bg-white">
-                                        <House className="w-4 h-4" />
-                                    </div>
-                                    <span className="text-[#E9E6ED]"> Inicio</span>
-                                </a>
-                            </SidebarMenuButton>
-                        </SidebarMenuItem>
+                        {
+                            routes.map((item) => (
+                                <SidebarMenuItem key={item.title}>
+                                    <SidebarMenuButton asChild>
+                                        <a href={item.url}>
+                                            <div className="p-1 rounded-lg text-[#131119] bg-white">
+                                                <item.icon className="w-4 h-4" />
+                                            </div>
+                                            {state === "expanded" && <span className="text-[#E9E6ED]" >{item.title}</span>}
+                                        </a>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            ))
+                        }
                     </SidebarMenu>
                 </SidebarGroup>
             </SidebarContent>
