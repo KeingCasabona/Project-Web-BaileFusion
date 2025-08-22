@@ -42,7 +42,7 @@ export function AppSidebar() {
                                 <SidebarMenuButton asChild >
                                     <a href={item.url}>
                                         <div className="p-1 rounded-lg bg-[#E9E6ED]">
-                                            <item.icon className="w-4 h-4 text-[#131119]" />
+                                            <item.icon className="w-4 h-4 text-[#0D0C11]" />
                                         </div>
                                         {state === "expanded" && <span  >{item.title}</span>}
                                     </a>
@@ -59,8 +59,8 @@ export function AppSidebar() {
                                 {
                                     routesTeacher.map((item) => (
                                         <SidebarMenuSubItem key={item.title} className="m-1" >
-                                            <SidebarMenuSubButton href={item.url} className="text-[#E9E6ED] hover:text-[#131119] transition-colors duration-200">
-                                                <div className=" p-1 rounded-lg text-[#131119] bg-[#A280FF]">
+                                            <SidebarMenuSubButton href={item.url} className="text-[#E9E6ED] hover:text-[#0D0C11] transition-colors duration-200">
+                                                <div className=" p-1 rounded-lg text-[#0D0C11] bg-[#A280FF]">
                                                     <item.icon className="w-4 h-4" />
                                                 </div>
                                                 {item.title}

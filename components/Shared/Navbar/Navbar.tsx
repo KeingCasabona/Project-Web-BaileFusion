@@ -18,8 +18,8 @@ export function Navbar() {
                 </Button>
 
                 <SignedOut>
-                    <SignInButton>
-                        <Button>
+                    <SignInButton >
+                        <Button className="bg-white text-[#0D0C11] hover:bg-[#A280FF] hover:text-white">
                             <LogIn />
                             Iniciar sesión
                         </Button>
