@@ -33,7 +33,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/(routes)/teacher/components/Header/FormCreateCourse"
+    "app/(routes)/teacher/components/Header/FormCreateDisc"
   ],
   "exclude": [
     "node_modules"
