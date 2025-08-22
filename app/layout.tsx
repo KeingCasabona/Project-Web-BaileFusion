@@ -4,7 +4,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import "./globals.css";
 import { SidebarProvider } from "@/components/ui/sidebar"
 import { AppSidebar } from "./(routes)/(root)/components";
-import { Navbar } from "@/components/Shared";
+import { Footer, Navbar } from "@/components/Shared";
 
 // import { Variable } from "lucide-react";
 
@@ -31,10 +31,14 @@ export default function RootLayout({
           <SidebarProvider>
             <AppSidebar />
             <div className="w-full bg-[#0D0C11] flex flex-col min-h-screen">
+
               <Navbar />
               <main className="flex-1">
                 {children}
               </main>
+
+              <Footer />
+
             </div>
           </SidebarProvider>
 
