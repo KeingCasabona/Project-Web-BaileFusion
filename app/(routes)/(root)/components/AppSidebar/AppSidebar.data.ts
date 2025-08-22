@@ -1,4 +1,4 @@
-import { House, Disc2Icon, DiscAlbum, Settings } from "lucide-react";
+import { House, Disc2Icon, DiscAlbum, Settings, GraduationCap, ChartArea } from "lucide-react";
 
 
 export const routes = [
@@ -23,3 +23,17 @@ export const routes = [
         icon: Settings,
     }
 ]
+
+export const routesTeacher = [
+    {
+        title: "Discos",
+        url: "/teacher",
+        icon: GraduationCap,
+    },
+    {
+        title: "Analíticas",
+        url: "/teacher/analytics",
+        icon: ChartArea,
+    }
+
+];
