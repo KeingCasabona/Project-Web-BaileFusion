@@ -22,7 +22,7 @@ export function Header() {
                 </h1>
                 <Dialog>
                     <DialogTrigger asChild>
-                        <Button className="bg-[#E9E6ED] text-[#0D0C11]  hover:bg-[#A280FF] hover:text-[#E9E6ED]">
+                        <Button className=" bg-[#A280FF] text-[#E9E6ED]   hover:bg-[#E9E6ED] hover:text-[#0D0C11]">
                             Crear disco
                             <Plus />
                         </Button>
