@@ -1,0 +1,33 @@
+import prisma from "@/lib/prisma";
+import { auth } from "@clerk/nextjs/server";
+import { HeaderDisc } from "./components";
+
+export default async function DiscPage({ params, }: { params: Promise<{ discId: string }>; }) {
+    const { discId } = await params;
+    const { userId } = await auth();
+
+    if (!userId) {
+        return <p>No tienes permiso para ver este disco</p>;
+    }
+
+    const disc = await prisma.disc.findUnique({
+        where: {
+            id: discId,
+            userId: userId,
+        },
+        include: {
+            music: true,
+        },
+    });
+
+    if (!disc) {
+        return <p>Este disco no existe</p>;
+    }
+
+    return (
+        <div className="m-6">
+            <HeaderDisc idDisc={disc.id} isPublished={disc.isPublished} />
+
+        </div>
+    )
+}
