@@ -1,6 +1,9 @@
 import { currentUser } from "@clerk/nextjs/server";
-import { Header } from "./components";
+
 import prisma from "@/lib/prisma";
+
+import { Header } from "./components";
+import { ListDiscs } from "./components/ListDiscs";
 
 export default async function TeacherPage() {
     const user = await currentUser();
@@ -15,11 +18,10 @@ export default async function TeacherPage() {
         }
     })
 
-    console.log(discs)
-
     return (
         <div>
             <Header />
+            <ListDiscs discs={discs} />
         </div>
     );
 }

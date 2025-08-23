@@ -17,8 +17,12 @@ import { Input } from "@/components/ui/input"
 
 import { formSchema } from "./FormCreateDisc.form"
 
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
+
 
 export function FormCreateDisc() {
+    const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -27,20 +31,18 @@ export function FormCreateDisc() {
         },
     })
 
-    // 2. Define a submit handler.
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
 
         try {
             const res = await axios.post("/api/disc", values)
+            toast("Disco agregado correctamente.");
+            router.push(`/teacher/${res.data.id}`);
 
-            console.log(res);
         } catch (error) {
             console.error(error);
+            toast.error("Ha ocurrido un error.")
         }
-    }
+    };
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-4">
