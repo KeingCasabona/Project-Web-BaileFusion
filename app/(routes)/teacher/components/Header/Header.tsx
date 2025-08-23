@@ -17,7 +17,7 @@ export function Header() {
     return (
         <div className="my-4 mx-6  rounded-lg bg-[#281947]">
             <div className="flex justify-between items-center py-4 px-6">
-                <h1 className="text-2xl text-white">
+                <h1 className="text-xl text-white">
                     Panel Profesor
                 </h1>
                 <Dialog>
