@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Disc {
+  id          String  @id @default(uuid())
+  userId      String
+  title       String  @db.Text
+  slug        String  @unique @db.Text
+  description String? @db.Text
+  imageUrl    String? @db.Text
+  price       String?
+  isPublished Boolean @default(false)
+  level       String? @db.Text
+
+  category String? @db.Text
+
+  music     Music[]
+  purchases Purchase[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Music {
+  id          String  @id @default(uuid())
+  title       String
+  description String? @db.Text
+  videoUrl    String  @db.Text
+  position    Int
+  isPublished Boolean @default(false)
+  isFree      Boolean @default(false)
+
+  discId String
+  disc   Disc   @relation(fields: [discId], references: [id], onDelete: Cascade)
+
+  userProgress UserProgress[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([discId])
+}
+
+model UserProgress {
+  id     String @id @default(uuid())
+  userId String
+
+  musicId String
+  music   Music  @relation(fields: [musicId], references: [id], onDelete: Cascade)
+
+  isCompleted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, musicId])
+  @@index([musicId])
+}
+
+model Purchase {
+  id     String @id @default(uuid())
+  userId String
+  discId String
+
+  disc Disc @relation(fields: [discId], references: [id], onDelete: Cascade)
+
+  price Float
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, discId])
+  @@index([discId])
+}
+
+model StripeCustomer {
+  id               String @id @default(uuid())
+  userId           String
+  stripeCustomerId String
+
+  createdAt DateTime @default(now())
+  updatesAt DateTime @updatedAt
+}
