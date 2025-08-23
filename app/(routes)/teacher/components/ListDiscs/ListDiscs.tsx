@@ -7,7 +7,7 @@ export function ListDiscs(props: ListDiscsProps) {
     const { discs } = props;
 
     if (discs.length === 0) {
-        return <p> No hay discos creados</p>
+        return <p className="flex flex-col text-[#E9E6ED] py-4 px-6"> No hay discos creados</p>
     }
     return (
         <div className="flex flex-col my-4 mx-6 text-[#E9E6ED] pt-4 gap-8">

@@ -1,6 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { ActionsProps } from "./Actions.types";
+"use client"
+import { useRouter } from "next/navigation";
 import { Edit, Trash } from "lucide-react";
+
+import { ActionsProps } from "./Actions.types";
 
 import {
     AlertDialog,
@@ -14,11 +16,29 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
+import { Button } from "@/components/ui/button";
+import axios from "axios";
+import { toast } from "sonner";
+
+
 export function Actions(props: ActionsProps) {
     const { discId } = props;
+
+    const router = useRouter();
+
+    const onEdit = () => {
+        router.push(`/teacher/${discId}`);
+    }
+
+    const deleteDisc = () => {
+        axios.delete(`/api/disc/${discId}`);
+        toast("Disco eliminado correctamente");
+        router.refresh();
+    };
+
     return (
         <div className="flex flex-col gap-2 items-center w-full lg:max-w-42">
-            <Button className=" bg-[#A280FF] text-[#E9E6ED]  hover:bg-[#E9E6ED] hover:text-[#0D0C11] w-full">
+            <Button className=" bg-[#A280FF] text-[#E9E6ED]  hover:bg-[#E9E6ED] hover:text-[#0D0C11] w-full" onClick={onEdit}>
                 Editar <Edit className="w-4 h-4" />
             </Button>
             <AlertDialog>
@@ -32,15 +52,14 @@ export function Actions(props: ActionsProps) {
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                        <AlertDialogTitle>¿Estás completamente seguro?</AlertDialogTitle>
                         <AlertDialogDescription>
-                            This action cannot be undone. This will permanently delete your account
-                            and remove your data from our servers.
+                            Se borrará el disco y sus canciones.
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction>Continue</AlertDialogAction>
+                        <AlertDialogAction onClick={deleteDisc}>Eliminar</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
