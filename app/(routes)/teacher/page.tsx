@@ -9,6 +9,14 @@ export default async function TeacherPage() {
         return <p>No registrado</p>
     }
 
+    const discs = await prisma.disc.findMany({
+        where: {
+            userId: user.id,
+        }
+    })
+
+    console.log(discs)
+
     return (
         <div>
             <Header />

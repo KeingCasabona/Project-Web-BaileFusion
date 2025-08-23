@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import axios from "axios"
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -27,10 +28,18 @@ export function FormCreateDisc() {
     })
 
     // 2. Define a submit handler.
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values)
+
+        try {
+            const res = await axios.post("/api/disc", values)
+
+            console.log(res);
+        } catch (error) {
+            console.error(error);
+        }
     }
     return (
         <Form {...form}>

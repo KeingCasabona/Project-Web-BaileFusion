@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${montserrat.variable}  antialiased`}>
+        <body className={`${montserrat.className}  antialiased`}>
           <SidebarProvider>
             <AppSidebar />
             <div className="w-full bg-[#0D0C11] flex flex-col min-h-screen">
