@@ -1,3 +1,4 @@
+import { Actions } from "./Actions";
 import { DiscCardProps } from "./DiscCard.type";
 import Image from "next/image";
 
@@ -7,7 +8,7 @@ export function DiscCard(props: DiscCardProps) {
     return (
         <div className="relative">
             <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
-                <div className="flex flex-col lg:flex-row gap-4 items-start w-full">
+                <div className="flex flex-col lg:flex-row gap-4 items-start">
                     <Image
                         src={imageUrl || "/default-image-disc.png"}
                         alt="Disco"
@@ -15,9 +16,9 @@ export function DiscCard(props: DiscCardProps) {
                         height={100}
                         className="rounded-md max-m-52"
                     />
-                    <div className="w-full">
-                        <div className="flex items-center justify-between">
-                            <h2 className="font-medium">{title}</h2>
+                    <div>
+                        <div className="flex items-center gap-4">
+                            <h2 className="text-xl font-medium">{title}</h2>
                             {isPublished ? (
                                 <span className="inline-block bg-[#A280FF] text-white text-xs font-medium px-2 py-1 rounded-md">
                                     Publicado
@@ -39,14 +40,10 @@ export function DiscCard(props: DiscCardProps) {
                                 <span className="font-semibold text-[#E9E6ED]"> S/ </span>
                                 <span className="font-semibold text-[#E9E6ED]"> {price || 0}</span>
                             </div>
-
-                            <div>
-
-                            </div>
                         </div>
-
                     </div>
                 </div>
+                <Actions discId={id} />
             </div>
         </div>
     )
