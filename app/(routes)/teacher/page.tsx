@@ -9,7 +9,7 @@ export default async function TeacherPage() {
     const user = await currentUser();
 
     if (!user) {
-        return <p>No registrado</p>
+        return <p className="flex flex-col text-[#E9E6ED] py-4 px-6">No registrado</p>
     }
 
     const discs = await prisma.disc.findMany({

@@ -32,7 +32,9 @@ export function Actions(props: ActionsProps) {
 
     const deleteDisc = () => {
         axios.delete(`/api/disc/${discId}`);
-        toast("Disco eliminado correctamente");
+        toast("Disco eliminado correctamente", {
+            style: { background: "#dc2626", color: "white" }, // rojo
+        });
         router.refresh();
     };
 

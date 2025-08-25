@@ -7,7 +7,7 @@ export default async function DiscPage({ params, }: { params: Promise<{ discId: 
     const { userId } = await auth();
 
     if (!userId) {
-        return <p>No tienes permiso para ver este disco</p>;
+        return <p className="flex flex-col text-[#E9E6ED] py-4 px-6">No tienes permiso para ver este disco</p>;
     }
 
     const disc = await prisma.disc.findUnique({
@@ -21,7 +21,7 @@ export default async function DiscPage({ params, }: { params: Promise<{ discId: 
     });
 
     if (!disc) {
-        return <p>Este disco no existe</p>;
+        return <p className="flex flex-col text-[#E9E6ED] py-4 px-6">Este disco no existe</p>;
     }
 
     return (

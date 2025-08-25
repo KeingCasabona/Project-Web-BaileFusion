@@ -48,6 +48,15 @@ export function HeaderDisc(props: HeaderDiscProps) {
         setIsLoading(false);
     }
 
+    const removeDisc = async () => {
+        axios.delete(`/api/disc/${idDisc}`);
+        toast("Disco eliminado correctamente", {
+            style: { background: "#dc2626", color: "white" }, // rojo
+        });
+
+        router.push("/teacher");
+    }
+
     return (
         <div>
             <div className="mb-4">
@@ -82,7 +91,7 @@ export function HeaderDisc(props: HeaderDiscProps) {
                         <Button
                             className="border-0 hover:bg-[#E9E6ED] hover:text-[#0D0C11]"
                             variant="destructive"
-                            onClick={() => console.log("Eliminar")}>
+                            onClick={removeDisc}>
                             <Trash />
                         </Button>
                     </div>
