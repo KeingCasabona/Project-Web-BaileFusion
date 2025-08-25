@@ -19,6 +19,8 @@ import { Settings } from "lucide-react";
 import { TitleBlock } from "../TitleBlock";
 import { DiscFormProps } from "./DiscForm.types";
 import { formSchema } from "./DiscForm.form";
+import axios from "axios"
+import { toast } from "sonner"
 
 export function DiscForm(props: DiscFormProps) {
     const { disc } = props;
@@ -34,7 +36,17 @@ export function DiscForm(props: DiscFormProps) {
 
 
     const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log(values)
+        try {
+            axios.patch(`/api/disc/${disc.id}`, values);
+            toast("Disco actualizado correctamente", {
+                style: { background: "#16a34a", color: "white" }, // verde
+            })
+        } catch (error) {
+            toast("Ocurrió un error", {
+                style: { background: "#dc2626", color: "white" }, // rojo
+            });
+
+        }
     }
 
     return (
