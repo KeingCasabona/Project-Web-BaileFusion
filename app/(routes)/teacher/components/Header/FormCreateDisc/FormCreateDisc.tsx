@@ -35,7 +35,9 @@ export function FormCreateDisc() {
 
         try {
             const res = await axios.post("/api/disc", values)
-            toast("Disco agregado correctamente.");
+            toast("Disco agregado correctamente.", {
+                style: { background: "#16a34a", color: "white" }, // verde
+            });
             router.push(`/teacher/${res.data.id}`);
 
         } catch (error) {

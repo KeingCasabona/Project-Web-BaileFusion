@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HeaderDiscProps } from "./HeaderDisc.types";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -9,19 +9,40 @@ import { toast } from "sonner";
 
 export function HeaderDisc(props: HeaderDiscProps) {
     const { idDisc, isPublished } = props;
+    const [published, setPublished] = useState(isPublished); // 👈 estado local
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
+
+    // sincronizar cuando cambien props
+    useEffect(() => {
+        setPublished(isPublished);
+    }, [isPublished]);
 
     const onPublish = async (state: boolean) => {
         setIsLoading(true);
         try {
-            axios.patch(`/api/disc/${idDisc}`, {
+            await axios.patch(`/api/disc/${idDisc}`, {
                 isPublished: state,
             });
-            toast(state ? "Disco publicado" : "Disco no publicado");
+
+            setPublished(state); // 👈 cambia inmediatamente en el cliente
+
+            if (state) {
+                toast("Disco publicado", {
+                    style: { background: "#16a34a", color: "white" }, // verde
+                });
+            } else {
+                toast("Disco no publicado", {
+                    style: { background: "#facc15", color: "black" }, // amarillo
+                });
+            }
+
+
             router.refresh();
         } catch {
-            toast("Ocurrió un error")
+            toast("Ocurrió un error", {
+                style: { background: "#dc2626", color: "white" }, // rojo
+            });
         }
 
         setIsLoading(false);
@@ -39,7 +60,7 @@ export function HeaderDisc(props: HeaderDiscProps) {
                     <div className="gap-2 flex items-center">
                         {isPublished ? (
                             <Button
-                                className="bg-red-950 text-[#E9E6ED] border-0 hover:bg-[#E9E6ED] hover:text-[#0D0C11]"
+                                className="bg-amber-400 text-[#0D0C11] border-0 hover:bg-[#E9E6ED] hover:text-[#0D0C11]"
                                 variant={"outline"}
                                 onClick={() => onPublish(false)}
                                 disabled={isLoading}
