@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { ClerkProvider } from '@clerk/nextjs'
 import "./globals.css";
 import { SidebarProvider } from "@/components/ui/sidebar"
@@ -10,9 +10,10 @@ import { Toaster } from "@/components/ui/sonner"
 // import { Variable } from "lucide-react";
 
 
-const montserrat = Montserrat({
+const popping = Poppins({
   variable: "--font-montserrat",
   subsets: ["latin"],
+  weight: "200"
 })
 
 export const metadata: Metadata = {
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${montserrat.className}  antialiased`}>
+        <body className={`${popping.className}  antialiased`}>
           <SidebarProvider>
             <AppSidebar />
             <div className="w-full bg-[#0D0C11] flex flex-col min-h-screen">

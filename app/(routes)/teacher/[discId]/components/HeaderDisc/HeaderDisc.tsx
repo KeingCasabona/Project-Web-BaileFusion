@@ -4,11 +4,28 @@ import { HeaderDiscProps } from "./HeaderDisc.types";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Eye, EyeOff, MoveLeft, Trash } from "lucide-react";
+import axios from "axios";
+import { toast } from "sonner";
 
 export function HeaderDisc(props: HeaderDiscProps) {
     const { idDisc, isPublished } = props;
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
+
+    const onPublish = async (state: boolean) => {
+        setIsLoading(true);
+        try {
+            axios.patch(`/api/disc/${idDisc}`, {
+                isPublished: state,
+            });
+            toast(state ? "Disco publicado" : "Disco no publicado");
+            router.refresh();
+        } catch {
+            toast("Ocurrió un error")
+        }
+
+        setIsLoading(false);
+    }
 
     return (
         <div>
@@ -20,11 +37,11 @@ export function HeaderDisc(props: HeaderDiscProps) {
                     </Button>
 
                     <div className="gap-2 flex items-center">
-                        {!isPublished ? (
+                        {isPublished ? (
                             <Button
                                 className="bg-red-950 text-[#E9E6ED] border-0 hover:bg-[#E9E6ED] hover:text-[#0D0C11]"
                                 variant={"outline"}
-                                onClick={() => console.log("Despublicar")}
+                                onClick={() => onPublish(false)}
                                 disabled={isLoading}
                             >
                                 Despublicar
@@ -32,9 +49,9 @@ export function HeaderDisc(props: HeaderDiscProps) {
                             </Button>
                         ) : (
                             <Button
-                                className="bg-emerald-950 text-[#E9E6ED] border-0 hover:bg-[#E9E6ED] hover:text-[#0D0C11]"
+                                className="bg-emerald-700 text-[#E9E6ED] border-0 hover:bg-[#E9E6ED] hover:text-[#0D0C11]"
                                 disabled={isLoading}
-                                onClick={() => console.log("Publicar")}
+                                onClick={() => onPublish(true)}
                             >
                                 Publicar
                                 <Eye />
