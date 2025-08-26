@@ -72,14 +72,19 @@ export function MusicsBlock(props: MusicsBlockProps) {
             <div className="flex gap-2 items-center justify-between mb-3 text-[#A280FF]" >
                 <p>Listado de Canciones:</p>
 
-                <Button className=" bg-amber-950 text-[#E9E6ED] hover:bg-[#E9E6ED] hover:text-[#0D0C11] cursor-pointer" size="sm" onClick={() => setShowInputMusic(true)}>
+                <Button
+                    className=" bg-amber-950 text-[#E9E6ED] hover:bg-[#E9E6ED] hover:text-[#0D0C11] cursor-pointer"
+                    size="sm"
+                    onClick={() => setShowInputMusic((prev) => !prev)} // 👈 toggle 
+                >
                     <PlusCircle className="w-4 h-4" />
-                    Crear música
+                    {showInputMusic ? "Cancelar" : "Crear música"} {/* 👈 cambia el texto dinámicamente */}
                 </Button>
             </div>
-            {showInputMusic && (< FormMusicName setShowInputMusic={setShowInputMusic} idDisc={idDisc} />)}
-
-
+            {showInputMusic && (
+                < FormMusicName
+                    setShowInputMusic={setShowInputMusic}
+                    idDisc={idDisc} />)}
             {isUpdating && (
                 <div
                     className="absolute top-0 right-0 flex items-center justify-center w-full h-full bg-slate-500/20">

@@ -32,7 +32,7 @@ export function FormMusicName(props: FormMusicNameProps) {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            axios.post(`/api/disc/${idDisc}/music`, {
+            await axios.post(`/api/disc/${idDisc}/music`, {
                 title: values.title
             })
             toast("Música creada", {
@@ -69,8 +69,8 @@ export function FormMusicName(props: FormMusicNameProps) {
                 <Button
                     className=" bg-emerald-700 hover:bg-[#E9E6ED] hover:text-[#0D0C11]"
                     type="submit"
-                    disabled={!form.formState.isValid}>
-                    Crear
+                    disabled={form.formState.isSubmitting || !form.formState.isValid}>
+                    {form.formState.isSubmitting ? "Creando..." : "Crear"}
                 </Button>
             </form>
         </Form>

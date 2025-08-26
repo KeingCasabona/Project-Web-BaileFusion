@@ -1,5 +1,5 @@
 "use client"
-import { Pencil, Video } from "lucide-react";
+import { ArrowDown, Video } from "lucide-react";
 import { TitleBlock } from "../../../../components";
 import { MusicVideoFormProps } from "./MusicVideoForm.types";
 import { Button } from "@/components/ui/button";
@@ -21,10 +21,14 @@ export function MusicVideoForm(props: MusicVideoFormProps) {
             await axios.patch(`/api/disc/${discId}/music/${musicId}`, {
                 videoUrl: url
             });
-            toast("Video actualizado");
+            toast("Video actualizado", {
+                style: { background: "#16a34a", color: "white" }, // verde
+            });
             router.refresh();
         } catch {
-            toast("Ocurrió un error");
+            toast("Ocurrió un error", {
+                style: { background: "#dc2626", color: "white" }, // rojo
+            });
         }
 
 
@@ -41,20 +45,31 @@ export function MusicVideoForm(props: MusicVideoFormProps) {
                 <p>No hay video</p>
             )}
             <div className="mt-4 p-2 rounded-md border">
-                <Button variant="secondary" onClick={() => setOnEditVideo(true)}>
-                    {onEditVideo ? "selecciona el video" : "Editar video"}
-                    <Pencil className="w-4 h-4" />
+                <Button
+                    className="bg-emerald-700 text-[#E9E6ED] border-0 hover:bg-[#E9E6ED] hover:text-[#0D0C11] cursor-pointer"
+                    variant="secondary"
+                    onClick={() => setOnEditVideo((prev) => !prev)} // 👈 toggle
+                >
+                    {onEditVideo ? (
+                        <>
+                            Selecciona el video abajo
+                            <ArrowDown className="w-4 h-4 ml-2" />
+                        </>
+                    ) : (
+                        <>{videoUrl ? "Editar video" : "Subir video"}</> /* 👈 depende de si hay video */
+                    )}
                 </Button>
 
                 {onEditVideo && (
                     <UploadButton
-                        className="w-full bg-[#0D0C11] rounded-md p-2 mt-2"
+                        className="w-full bg-[#0D0C11] rounded-md p-2 mt-2 "
                         endpoint="musicVideo"
                         onClientUploadComplete={(url) => {
                             console.log(url);
 
                             if (url) {
                                 onSubmit(url[0].serverData.url);
+                                setOnEditVideo(false); // 👈 cerrar automáticamente después de subir
                             }
                         }}
                     />
