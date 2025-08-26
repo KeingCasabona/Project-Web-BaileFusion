@@ -58,7 +58,7 @@ export function DiscPrice(props: DiscPriceProps) {
                 </SelectContent>
             </Select> */}
 
-            <Button onClick={onChangePrice} disabled={!price} className="mt-3 bg-emerald-700 hover:bg-[#E9E6ED] hover:text-[#0D0C11]">
+            <Button onClick={onChangePrice} disabled={!price} className="mt-3 bg-emerald-700 hover:bg-[#E9E6ED] hover:text-[#0D0C11] cursor-pointer">
                 Guardar precio
             </Button>
         </div>

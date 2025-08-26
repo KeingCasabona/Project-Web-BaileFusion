@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { TitleBlock } from "../../../components";
 import axios from "axios";
 import { toast } from "sonner";
+import { MusicTitleForm } from "./MusicTitleForm";
 
 
 
@@ -78,6 +79,7 @@ export function MusicForm(props: MusicFormProps) {
                     </Button>
                 </div>
             </div>
+            <MusicTitleForm discId={discId} music={music} />
         </div>
     );
 }
