@@ -106,7 +106,7 @@ export function DiscForm(props: DiscFormProps) {
                         />
 
                     </div>
-                    <Button className="bg-emerald-700 hover:bg-[#E9E6ED] hover:text-[#0D0C11]" type="submit">Guardar cambios</Button>
+                    <Button className="bg-emerald-700 hover:bg-[#E9E6ED] hover:text-[#0D0C11] cursor-pointer" type="submit">Guardar cambios</Button>
                 </form>
             </Form>
         </div>)

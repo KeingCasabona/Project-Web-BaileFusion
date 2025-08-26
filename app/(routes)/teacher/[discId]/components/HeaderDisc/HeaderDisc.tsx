@@ -60,8 +60,8 @@ export function HeaderDisc(props: HeaderDiscProps) {
     return (
         <div>
             <div className="mb-4">
-                <div className="flex flex-col md:flex-row justify-between items-center">
-                    <Button onClick={() => router.push("/teacher")}>
+                <div className="flex flex-col md:flex-row justify-between items-center ">
+                    <Button className=" hover:text-[#0D0C11] hover:bg-[#E9E6ED] cursor-pointer" onClick={() => router.push("/teacher")}>
                         <MoveLeft />
                         Volver a todos los discos
                     </Button>
@@ -69,7 +69,7 @@ export function HeaderDisc(props: HeaderDiscProps) {
                     <div className="gap-2 flex items-center">
                         {isPublished ? (
                             <Button
-                                className="bg-amber-400 text-[#0D0C11] border-0 hover:bg-[#E9E6ED] hover:text-[#0D0C11]"
+                                className="bg-amber-400 text-[#0D0C11] border-0 hover:bg-[#E9E6ED] hover:text-[#0D0C11] cursor-pointer"
                                 variant={"outline"}
                                 onClick={() => onPublish(false)}
                                 disabled={isLoading}
@@ -79,7 +79,7 @@ export function HeaderDisc(props: HeaderDiscProps) {
                             </Button>
                         ) : (
                             <Button
-                                className="bg-emerald-700 text-[#E9E6ED] border-0 hover:bg-[#E9E6ED] hover:text-[#0D0C11]"
+                                className="bg-emerald-700 text-[#E9E6ED] border-0 hover:bg-[#E9E6ED] hover:text-[#0D0C11] cursor-pointer"
                                 disabled={isLoading}
                                 onClick={() => onPublish(true)}
                             >
@@ -89,7 +89,7 @@ export function HeaderDisc(props: HeaderDiscProps) {
                         )}
 
                         <Button
-                            className="border-0 hover:bg-[#E9E6ED] hover:text-[#0D0C11]"
+                            className="border-0 hover:bg-[#E9E6ED] hover:text-[#0D0C11] cursor-pointer"
                             variant="destructive"
                             onClick={removeDisc}>
                             <Trash />
