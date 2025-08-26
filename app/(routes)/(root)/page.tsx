@@ -1,10 +1,9 @@
-import Image from "next/image";
-import { Button } from "@/components/ui/button"
+import { ExploreDiscs } from "./components";
 
 export default function Home() {
   return (
-    <div>
-
+    <div >
+      <ExploreDiscs />
     </div>
   );
 }

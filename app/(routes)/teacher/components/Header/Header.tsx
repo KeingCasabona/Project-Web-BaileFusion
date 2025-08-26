@@ -3,7 +3,6 @@ import { Plus } from "lucide-react";
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -22,7 +21,7 @@ export function Header() {
                 </h1>
                 <Dialog>
                     <DialogTrigger asChild>
-                        <Button className=" bg-[#A280FF] text-[#E9E6ED]   hover:bg-[#E9E6ED] hover:text-[#0D0C11]">
+                        <Button className=" bg-[#A280FF] text-[#E9E6ED] hover:bg-[#E9E6ED] hover:text-[#0D0C11] cursor-pointer" >
                             Crear disco
                             <Plus />
                         </Button>
