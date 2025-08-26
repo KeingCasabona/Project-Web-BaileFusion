@@ -53,7 +53,7 @@ export function DiscImage(props: DiscImageProps) {
         )}
 
         <Button
-            className="w-full mt-4 bg-emerald-700 text-[#E9E6ED] border-0 hover:bg-[#E9E6ED] hover:text-[#0D0C11]"
+            className="w-full mt-4 bg-emerald-700 text-[#E9E6ED] border-0 hover:bg-[#E9E6ED] hover:text-[#0D0C11] cursor-pointer"
             variant="outline"
             size="sm"
             onClick={() => setIsEditing(!isEditing)}

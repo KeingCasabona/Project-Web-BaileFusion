@@ -18,26 +18,40 @@ import { Input } from "@/components/ui/input"
 import { MusicTitleFormProps } from "./MusicTitleForm.types";
 import { formSchema } from "./MusicTitleForm.form";
 import { EditorDescription } from "@/components/Shared"
+import axios from "axios"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 export function MusicTitleForm(props: MusicTitleFormProps) {
     const { discId, music } = props;
-
+    const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             title: music.title || "",
-            description: music.description || "",
+            // description: music.description || "",
             isFree: music.isFree || false,
         },
     })
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log(values)
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        try {
+            await axios.patch(`/api/disc/${discId}/music/${music.id}`, {
+                title: values.title,
+                // description: values.description,
+                isFree: values.isFree,
+            });
+            toast("Canción modificada", {
+                style: { background: "#16a34a", color: "white" }, // verde
+            });
+            router.refresh();
+        } catch (error) {
+            toast("Ocurrió un error", {
+                style: { background: "#dc2626", color: "white" }, // rojo
+            });
+        }
     }
-
     return (
-
-
         <div className="p-6 rounded-md bg-[#1E182E] mt-6" >
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 gap-6">
@@ -94,7 +108,8 @@ export function MusicTitleForm(props: MusicTitleFormProps) {
                     <div />
                     <Button
                         className="mt-3 bg-emerald-700 hover:bg-[#E9E6ED] hover:text-[#0D0C11] cursor-pointer"
-                        type="submit">Guardar</Button>
+                        type="submit">Guardar
+                    </Button>
                 </form>
             </Form>
         </div>

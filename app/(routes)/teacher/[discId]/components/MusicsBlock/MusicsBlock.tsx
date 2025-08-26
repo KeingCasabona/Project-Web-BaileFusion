@@ -72,7 +72,7 @@ export function MusicsBlock(props: MusicsBlockProps) {
             <div className="flex gap-2 items-center justify-between mb-3 text-[#A280FF]" >
                 <p>Listado de Canciones:</p>
 
-                <Button className=" bg-amber-950 text-[#E9E6ED] hover:bg-[#E9E6ED] hover:text-[#0D0C11]" size="sm" onClick={() => setShowInputMusic(true)}>
+                <Button className=" bg-amber-950 text-[#E9E6ED] hover:bg-[#E9E6ED] hover:text-[#0D0C11] cursor-pointer" size="sm" onClick={() => setShowInputMusic(true)}>
                     <PlusCircle className="w-4 h-4" />
                     Crear música
                 </Button>
