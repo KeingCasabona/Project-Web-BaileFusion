@@ -7,6 +7,7 @@ import { TitleBlock } from "../../../components";
 import axios from "axios";
 import { toast } from "sonner";
 import { MusicTitleForm } from "./MusicTitleForm";
+import { MusicVideoForm } from "./MusicVideoForm";
 
 
 
@@ -80,6 +81,12 @@ export function MusicForm(props: MusicFormProps) {
                 </div>
             </div>
             <MusicTitleForm discId={discId} music={music} />
+
+            <MusicVideoForm
+                musicId={music.id}
+                discId={discId}
+                videoUrl={music.videoUrl}
+            />
         </div>
     );
 }
