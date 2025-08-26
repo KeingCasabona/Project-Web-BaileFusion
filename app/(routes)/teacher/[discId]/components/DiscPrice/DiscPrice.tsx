@@ -30,7 +30,7 @@ export function DiscPrice(props: DiscPriceProps) {
             <TitleBlock title="Precio del Disco" icon={DollarSign} />
 
             <div className="mt-4">
-                <label className="text-sm text-white mb-2 block">
+                <label className="text-sm text-[#E9E6ED] mb-2 block">
                     Precio ( S/ )
                 </label>
                 <Input
