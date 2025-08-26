@@ -40,7 +40,6 @@ export default async function DiscPage({ params, }: { params: Promise<{ discId: 
 
             <MusicsBlock idDisc={disc.id} musics={disc.music} />
 
-
         </div>
     );
 }
