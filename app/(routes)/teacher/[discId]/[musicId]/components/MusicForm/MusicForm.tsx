@@ -44,6 +44,24 @@ export function MusicForm(props: MusicFormProps) {
         }
     }
 
+    const removeMusic = async () => {
+        try {
+            await axios.delete(`/api/disc/${discId}/music/${music.id}`);
+
+            toast("Música eliminada", {
+                style: { background: "#dc2626", color: "white" }, // rojo
+            });
+
+            router.push(`/teacher/${discId}`); // vuelve a la lista del disco
+            router.refresh();
+        } catch (error) {
+            console.error(error);
+            toast("Error al eliminar la música", {
+                style: { background: "#facc15", color: "black" }, // amarillo
+            });
+        }
+    };
+
     return (
 
         <div >
@@ -75,7 +93,7 @@ export function MusicForm(props: MusicFormProps) {
                     <Button
                         className="border-0 hover:bg-[#E9E6ED] hover:text-[#0D0C11] cursor-pointer"
                         variant="destructive"
-                        onClick={() => console.log("Eliminar musica")}>
+                        onClick={removeMusic}>
                         <Trash />
                     </Button>
                 </div>

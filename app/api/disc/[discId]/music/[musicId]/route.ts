@@ -1,7 +1,7 @@
+"user client"
 import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { ca } from "zod/v4/locales";
 
 export async function PATCH(
     req: Request,
@@ -18,7 +18,7 @@ export async function PATCH(
         const music = await prisma.music.update({
             where: {
                 id: musicId,
-                discId: discId,
+                // discId: discId, 
             },
             data: {
                 ...values,
@@ -30,5 +30,30 @@ export async function PATCH(
         console.log("[DISC_MUSIC_UPDATE]", error);
 
         return new NextResponse("Internal server error", { status: 500 });
+    }
+}
+
+export async function DELETE(
+    req: Request,
+    { params }: { params: Promise<{ discId: string; musicId: string }> }
+) {
+    try {
+        const { userId } = await auth();
+        const { discId, musicId } = await params;
+
+        if (!userId) {
+            return new NextResponse("Unauthorized", { status: 401 })
+        }
+
+        const music = await prisma.music.delete({
+            where: {
+                id: musicId,
+                discId: discId,
+            },
+        });
+        return NextResponse.json(music);
+    } catch (error) {
+        console.log("[DISC_MUSIC_DELETE]", error);
+        return new NextResponse("Internal server error", { status: 500 })
     }
 }
