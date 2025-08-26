@@ -15,19 +15,39 @@ import { Input } from "@/components/ui/input"
 
 import { FormMusicNameProps } from "./FormMusicName.type";
 import { formSchema } from "./FormMusicName.form"
+import axios from "axios"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
+
 
 export function FormMusicName(props: FormMusicNameProps) {
     const { idDisc, setShowInputMusic } = props;
-
+    const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             title: "",
         },
-    })
+    });
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log(values)
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        try {
+            axios.post(`/api/disc/${idDisc}/music`, {
+                title: values.title
+            })
+            toast("Música creada", {
+                style: { background: "#16a34a", color: "white" }, // verde
+            });
+            setShowInputMusic(false)
+            router.refresh()
+
+        } catch (error) {
+            toast("Hubo un error al crear la canción", {
+                style: { background: "#dc2626", color: "white" }, // rojo
+            });
+            console.log(error);
+
+        }
     }
 
     return (
