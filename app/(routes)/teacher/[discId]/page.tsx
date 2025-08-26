@@ -17,7 +17,11 @@ export default async function DiscPage({ params, }: { params: Promise<{ discId: 
             userId: userId,
         },
         include: {
-            music: true,
+            music: {
+                orderBy: {
+                    position: 'asc',
+                },
+            },
         },
     });
 

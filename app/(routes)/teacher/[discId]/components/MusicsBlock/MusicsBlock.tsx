@@ -3,7 +3,7 @@ import { GripVertical, ListCheck, Loader2, Pencil, PlusCircle } from "lucide-rea
 import { TitleBlock } from "../TitleBlock";
 import { MusicsBlockProps } from "./MusicsBlock.types";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { FormMusicName } from "./FormMusicName";
 import { } from "@/components/ui/button";
 import { DragDropContext, Droppable, DropResult, Draggable, } from "@hello-pangea/dnd";
@@ -18,6 +18,10 @@ export function MusicsBlock(props: MusicsBlockProps) {
     const [isUpdating, setIsUpdating] = useState(false);
 
     const router = useRouter()
+
+    useEffect(() => {
+        setMusicsList(musics ?? []);
+    }, [musics]);
 
     const onEditMusic = (musicId: string) => {
         router.push(`/teacher/${idDisc}/${musicId}`)
@@ -47,10 +51,14 @@ export function MusicsBlock(props: MusicsBlockProps) {
                 list: updateData,
             });
 
-            toast("Orden actualizado");
+            toast("Orden actualizado", {
+                style: { background: "#16a34a", color: "white" }, // verde
+            });
             router.refresh();
         } catch {
-            toast("Ocurrió un error");
+            toast("Ocurrió un error", {
+                style: { background: "#dc2626", color: "white" }, // rojo
+            });
         } finally {
             setIsUpdating(false);
         }
@@ -124,6 +132,7 @@ export function MusicsBlock(props: MusicsBlockProps) {
                                     )}
                                 </Draggable>
                             ))}
+                            {provided.placeholder}
                         </div>
                     )}
                 </Droppable>
