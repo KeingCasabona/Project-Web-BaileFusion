@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
-import { DiscForm, HeaderDisc } from "./components";
+import { DiscForm, DiscImage, HeaderDisc } from "./components";
 
 export default async function DiscPage({ params, }: { params: Promise<{ discId: string }>; }) {
     const { discId } = await params;
@@ -30,6 +30,12 @@ export default async function DiscPage({ params, }: { params: Promise<{ discId: 
 
             <DiscForm disc={disc} />
 
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4 text-[#E9E6ED]">
+                <DiscImage idDisc={disc.id} imageDisc={disc.imageUrl} />
+                <p>Precio del Disco</p>
+            </div>
+            <p className="text-[#E9E6ED]">Músicas del Disco</p>
+
         </div>
-    )
+    );
 }

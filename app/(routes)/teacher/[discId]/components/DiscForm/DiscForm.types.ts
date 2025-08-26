@@ -1,7 +1,7 @@
-import { Disc, Music } from "@prisma/client";
+import { Music, Disc } from "@prisma/client";
 
 export type DiscFormProps = {
     disc: DiscWithRelations;
 };
 
-type DiscWithRelations = Disc & { chapters: Music[] };
+type DiscWithRelations = Disc & { music: Music[] };
