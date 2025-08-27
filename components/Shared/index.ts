@@ -1,3 +1,5 @@
 export * from "./Navbar";
 export * from "./Footer";
 export * from "./EditorDescription";
+export * from "./ListDiscs";
+export * from "./IconBadge";

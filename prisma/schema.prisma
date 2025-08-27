@@ -20,7 +20,7 @@ model Disc {
   slug        String  @unique @db.Text
   description String? @db.Text
   imageUrl    String? @db.Text
-  price       String?
+  price       Float?
   isPublished Boolean @default(false)
   level       String? @db.Text
 

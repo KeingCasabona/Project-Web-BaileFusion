@@ -32,11 +32,11 @@ export function ExploreDiscs() {
                             💃🏽 Entrena, aprende y disfruta con la mejor mezcla de estilos en un solo lugar.
                             Baile Fusión: el ritmo que se vive dentro y fuera del gimnasio.
                         </p>
-                        <Button className="w-fit  bg-[#A280FF] text-[#E9E6ED] hover:bg-[#E9E6ED] hover:text-[#0D0C11] cursor-pointer" onClick={() => router.push("/disc")}>
+                        <Button className="w-fit  bg-[#A280FF] text-[#E9E6ED] hover:bg-[#E9E6ED] hover:text-[#0D0C11] cursor-pointer" onClick={() => router.push("/discs")}>
                             Tu momento es ahora
                         </Button>
                     </div>
-                    <div className="flex items-end">
+                    <div className="flex items-center">
                         <Image
                             src="/explore.jpeg"
                             alt="Explora todos los discos"
