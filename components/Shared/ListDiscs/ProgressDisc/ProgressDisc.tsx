@@ -1,6 +1,8 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { ProgressDiscProps } from "./ProgressDisc.types";
 import { getUserProgressByDisc } from "@/actions/getUserProgressByDisc";
+import { Progress } from "@radix-ui/react-progress";
+import { formatPrice } from "@/lib/formatPrice";
 
 export async function ProgressDisc(props: ProgressDiscProps) {
     const { discId, totalMusics, price } = props;
@@ -18,12 +20,12 @@ export async function ProgressDisc(props: ProgressDiscProps) {
         <div className="mt-4">
             {totalMusics > 0 && progressDisc > 0 ? (
                 <div>
-                    <p>Progreso {progressDisc}</p>
+                    <Progress value={progressDisc} className="[&>*]:bg-violet-300" />
+                    <p className="text-xs mt-1">{progressDisc}% Completado</p>
                 </div>
             ) : (
-                <h4>{price}</h4>
+                <h4>{formatPrice(price)}</h4>
             )}
-
         </div>
     )
 

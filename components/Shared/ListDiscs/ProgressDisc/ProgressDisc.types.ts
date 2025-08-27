@@ -1,5 +1,5 @@
 export type ProgressDiscProps = {
     discId: string;
-    totalDisc: number;
+    totalMusics: number;
     price: string | null;
 }
