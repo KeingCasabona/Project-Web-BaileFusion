@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
+import { notFound } from "next/navigation";
 import { DiscForm, DiscImage, DiscPrice, HeaderDisc, MusicsBlock } from "./components";
 
 
@@ -26,7 +27,7 @@ export default async function DiscPage({ params, }: { params: Promise<{ discId: 
     });
 
     if (!disc) {
-        return <p className="flex flex-col text-[#E9E6ED] py-4 px-6">Este disco no existe</p>;
+        notFound();
     }
 
     return (
